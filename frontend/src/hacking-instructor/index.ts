@@ -21,19 +21,19 @@ import { AdminSectionInstruction } from './challenges/adminSection'
 import { ReflectedXssInstruction } from './challenges/reflectedXss'
 
 const challengeInstructions: ChallengeInstruction[] = [
-  ScoreBoardInstruction,
-  LoginAdminInstruction,
-  LoginJimInstruction,
-  DomXssInstruction,
-  PrivacyPolicyInstruction,
-  ViewBasketInstruction,
-  ForgedFeedbackInstruction,
-  PasswordStrengthInstruction,
-  BonusPayloadInstruction,
-  LoginBenderInstruction,
-  CodingChallengesInstruction,
-  AdminSectionInstruction,
-  ReflectedXssInstruction
+  // ScoreBoardInstruction,
+  // LoginAdminInstruction,
+  // LoginJimInstruction,
+  // DomXssInstruction,
+  // PrivacyPolicyInstruction,
+  // ViewBasketInstruction,
+  // ForgedFeedbackInstruction,
+  // PasswordStrengthInstruction,
+  // BonusPayloadInstruction,
+  // LoginBenderInstruction,
+  // CodingChallengesInstruction,
+  // AdminSectionInstruction,
+  // ReflectedXssInstruction
 ]
 
 export interface ChallengeInstruction {
@@ -67,7 +67,7 @@ export interface ChallengeHint {
   resolved: () => Promise<void>
 }
 
-function loadHint (hint: ChallengeHint): HTMLElement {
+function loadHint(hint: ChallengeHint): HTMLElement {
   const target = document.querySelector(hint.fixture)
 
   if (!target) {
@@ -145,13 +145,13 @@ function loadHint (hint: ChallengeHint): HTMLElement {
   return wrapper
 }
 
-async function waitForDoubleClick (element: HTMLElement) {
+async function waitForDoubleClick(element: HTMLElement) {
   return await new Promise((resolve) => {
     element.addEventListener('dblclick', resolve)
   })
 }
 
-async function waitForCancel (element: HTMLElement) {
+async function waitForCancel(element: HTMLElement) {
   return await new Promise((resolve) => {
     element.addEventListener('click', () => {
       resolve('break')
@@ -159,11 +159,11 @@ async function waitForCancel (element: HTMLElement) {
   })
 }
 
-export function hasInstructions (challengeName: string): boolean {
+export function hasInstructions(challengeName: string): boolean {
   return challengeInstructions.find(({ name }) => name === challengeName) !== undefined
 }
 
-export async function startHackingInstructorFor (challengeName: string): Promise<void> {
+export async function startHackingInstructorFor(challengeName: string): Promise<void> {
   const challengeInstruction = challengeInstructions.find(({ name }) => name === challengeName) ?? TutorialUnavailableInstruction
 
   for (const hint of challengeInstruction.hints) {
